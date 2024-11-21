@@ -77,7 +77,7 @@ const ServiceArea = () => {
                 </div>
 
                 <div className=" mt-4 mb-6  " >
-                    <button className="p-2 block mx-auto border-2 border-[#FF3811] " >More Service</button>
+                    <button className="p-2 block mx-auto border-2 border-[#FF3811] text-[#FF3811] " >More Service</button>
                 </div>
 
             </div>
