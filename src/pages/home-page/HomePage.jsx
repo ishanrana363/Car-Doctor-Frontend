@@ -6,6 +6,7 @@ import ContactInfo from './ContactPage'
 import Product from './Product'
 import Team from './Team'
 import WhyChooseUs from './WhyChooseUs'
+import ClientReview from './ClientReview'
 
 const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ const HomePage = () => {
         <Product></Product>
         <Team></Team>
         <WhyChooseUs></WhyChooseUs>
+        <ClientReview></ClientReview>
     </div>
   )
 }
