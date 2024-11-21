@@ -5,6 +5,7 @@ import ServiceArea from './ServiceArea'
 import ContactInfo from './ContactPage'
 import Product from './Product'
 import Team from './Team'
+import WhyChooseUs from './WhyChooseUs'
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
         <ContactInfo></ContactInfo>
         <Product></Product>
         <Team></Team>
+        <WhyChooseUs></WhyChooseUs>
     </div>
   )
 }
