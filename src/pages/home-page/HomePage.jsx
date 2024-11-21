@@ -2,6 +2,7 @@ import React from 'react'
 import BannerPage from './BannerPage'
 import AboutPage from './AboutPage'
 import ServiceArea from './ServiceArea'
+import ContactInfo from './ContactPage'
 
 const HomePage = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage = () => {
         <BannerPage></BannerPage>
         {/* <AboutPage></AboutPage> */}
         <ServiceArea></ServiceArea>
+        <ContactInfo></ContactInfo>
     </div>
   )
 }
