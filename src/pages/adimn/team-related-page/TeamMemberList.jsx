@@ -24,8 +24,8 @@ const TeamMemberList = () => {
 
         if (resp.isConfirmed) {
             try {
-                // Delete product by ID
-                let res = await axiosPublic.delete(`/product/${id}`);
+                // Delete team member by ID
+                let res = await axiosPublic.delete(`/team/${id}`);
                 if (res) {
                     Swal.fire({
                         title: "Deleted!",
@@ -51,7 +51,7 @@ const TeamMemberList = () => {
     return (
         <div className="p-6 flex justify-center text-black items-center">
             <Helmet>
-                <title>Dashboard | Product List</title>
+                <title>Dashboard | Team Member List</title>
             </Helmet>
             <div className="w-full max-w-5xl">
                 <table className="min-w-full bg-white rounded-lg shadow-md">
@@ -83,7 +83,7 @@ const TeamMemberList = () => {
                                 <td className="py-3 mt-4 px-6 text-center flex justify-center items-center space-x-4">
                                     {/* Edit Button with Tooltip */}
                                     <div className="relative group">
-                                        <Link to={`/dashboard/product-update/${item._id}`}>
+                                        <Link to={`/dashboard/team-member-update/${item._id}`}>
                                             <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-md flex items-center">
                                                 <FaEdit />
                                             </button>
