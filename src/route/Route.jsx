@@ -5,6 +5,7 @@ import AdminLayout from "../admin-layout/AdminLayout";
 import BannerUpload from "../pages/adimn/banner-related-page/BannerUpload";
 import BannerList from "../pages/adimn/banner-related-page/BannerList";
 import BannerUpdate from "../pages/adimn/banner-related-page/BannerUpdate";
+import CreateProduct from "../pages/adimn/product-page/CreateProduct";
 
 export const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path : "banner-update/:id",
                 element : <BannerUpdate></BannerUpdate>
+            },
+            {
+                path : "create-product",
+                element : <CreateProduct></CreateProduct>
             }
         ]
     }
