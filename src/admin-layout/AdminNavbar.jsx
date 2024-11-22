@@ -3,7 +3,7 @@ import React from 'react'
 const AdminNavbar = () => {
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar bg-gradient-to-tr from-sky-500 via-cyan-400 via-teal-300 to-green-500 text-gray-950 transition-all duration-300">
                 <div className="flex-1">
                     <a className="btn btn-ghost text-xl">daisyUI</a>
                 </div>

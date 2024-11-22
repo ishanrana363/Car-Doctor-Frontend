@@ -1,37 +1,23 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { useQuery } from 'react-query'
+import useAxiosPublic from "../../hook/UseAxiosPublic";
 
 const BannerPage = () => {
-    const carouselItems = [
-        {
-            id: 1,
-            title: "Affordable Price For Car Servicing",
-            description:
-                "There are many variations of passages of available, but the majority have suffered alteration in some form.",
-            img: "https://res.cloudinary.com/dj2edy2rg/image/upload/v1732089648/ndfbqnojvyltuifhrw19.jpg",
+    const axiosPublic = useAxiosPublic()
+    
+
+    const {data : carouselItems = []} = useQuery({
+        queryKey: 'carouselItems',
+        queryFn: async () => {
+            let res = await axiosPublic.get(`/banner`);
+            return res.data.data;
         },
-        {
-            id: 2,
-            title: "Expert Mechanics for Your Service",
-            description:
-                "Our mechanics are certified and experienced in all types of vehicles and models.",
-            img: "https://res.cloudinary.com/dj2edy2rg/image/upload/v1732029430/uz2bmnb2ebsoq8etgk0k.webp",
-        },
-        {
-            id: 3,
-            title: "High-Quality Tools and Equipment",
-            description:
-                "We use only the best tools and equipment to ensure quality service for your car.",
-            img: "https://res.cloudinary.com/dj2edy2rg/image/upload/v1732089648/ndfbqnojvyltuifhrw19.jpg",
-        },
-        {
-            id: 4,
-            title: "Reliable and Trustworthy Service",
-            description:
-                "Your car is in safe hands. Trust us for reliable and honest servicing.",
-            img: "https://res.cloudinary.com/dj2edy2rg/image/upload/v1732029430/uz2bmnb2ebsoq8etgk0k.webp",
-        },
-    ];
+    });
+
+
+
+
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -62,15 +48,15 @@ const BannerPage = () => {
             {/* Carousel Item */}
             <div
                 className="relative w-full h-full flex items-center justify-center bg-cover bg-center transition-all duration-500"
-                style={{ backgroundImage: `url(${carouselItems[currentIndex].img})` }}
+                style={{ backgroundImage: `url(${carouselItems[currentIndex]?.image})` }}
             >
                 <div className="absolute inset-0 bg-black bg-opacity-50"></div>
                 <div className="relative z-10 text-center p-8 max-w-xl">
                     <h1 className="text-4xl font-bold mb-4">
-                        {carouselItems[currentIndex].title}
+                        {carouselItems[currentIndex]?.heading}
                     </h1>
                     <p className="text-gray-300 mb-6">
-                        {carouselItems[currentIndex].description}
+                        {carouselItems[currentIndex]?.title}
                     </p>
                     <div className="flex space-x-4 justify-center">
                         <button className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">

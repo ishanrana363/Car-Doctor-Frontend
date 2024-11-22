@@ -88,8 +88,8 @@ const Sidebar = () => {
                                 </li>
                                 <li className="mt-1">
                                     <NavLink
-                                        to="/dashboard/all-projects"
-                                        className={`${pathname === '/dashboard/all-projects'
+                                        to="/dashboard/all-banner"
+                                        className={`${pathname === '/dashboard/all-banner'
                                                 ? 'bg-[#55679C] text-white'
                                                 : 'bg-white text-[#4040f6]'
                                             } px-2 py-1 flex items-center  rounded-lg text-sm`}
