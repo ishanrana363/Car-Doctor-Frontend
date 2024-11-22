@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const backendUrl = `http://localhost:5500/api/v1`;
-const backendUrl = `https://meal-hisab-frontend-pp6s.vercel.app/api/v1`;
+const backendUrl = `https://car-doctor-backend-zeta.vercel.app/api/v1`;
 
 
 const axiosPublic = axios.create({

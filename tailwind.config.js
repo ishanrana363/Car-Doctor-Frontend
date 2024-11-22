@@ -7,6 +7,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('flowbite/plugin'), // Add Flowbite plugin
+    require('flowbite/plugin'),
+    require("daisyui") // Add Flowbite plugin
   ],
 };
