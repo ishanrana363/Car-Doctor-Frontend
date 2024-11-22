@@ -74,8 +74,8 @@ const Sidebar = () => {
                                     <NavLink
                                         to="/dashboard/banner-upload"
                                         className={`${pathname === '/dashboard/banner-upload'
-                                                ? 'bg-[#55679C] text-white'
-                                                : 'bg-white text-[#4040f6]'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
                                             } px-2 py-1 flex items-center  rounded-lg text-sm   `}
                                     >
                                         <IoRocketSharp className="text-base" />
@@ -90,8 +90,8 @@ const Sidebar = () => {
                                     <NavLink
                                         to="/dashboard/all-banner"
                                         className={`${pathname === '/dashboard/all-banner'
-                                                ? 'bg-[#55679C] text-white'
-                                                : 'bg-white text-[#4040f6]'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
                                             } px-2 py-1 flex items-center  rounded-lg text-sm`}
                                     >
                                         <FaClipboardList className="text-base" />
@@ -106,8 +106,63 @@ const Sidebar = () => {
                         )}
                     </li>
 
-                    {/* Analytics Section */}
                     
+                    {/* Product Section */}
+                    <li>
+                        <div
+                            className="flex justify-between items-center cursor-pointer px-2 py-2  rounded-lg"
+                            onClick={() => handleMenuClick('product')}
+                        >
+                            <div className="flex items-center">
+                                {/* <FaProjectDiagram className="text-base" /> */}
+                                <span
+                                    className={`${isSidebarOpen ? 'block' : 'hidden'
+                                        } ml-2 text-sm font-medium`}
+                                >
+                                    Product
+                                </span>
+                            </div>
+                            {activeMenu === 'product' ? <MdExpandLess /> : <MdExpandMore />}
+                        </div>
+
+                        {activeMenu === 'product' && (
+                            <ul className="mx-8 ">
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/product-upload"
+                                        className={`${pathname === '/dashboard/product-upload'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
+                                            } px-2 py-1 flex items-center  rounded-lg text-sm   `}
+                                    >
+                                        <IoRocketSharp className="text-base" />
+                                        <span
+                                            className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
+                                        >
+                                            Product Upload
+                                        </span>
+                                    </NavLink>
+                                </li>
+                                <li className="mt-1">
+                                    <NavLink
+                                        to="/dashboard/all-products"
+                                        className={`${pathname === '/dashboard/all-products'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
+                                            } px-2 py-1 flex items-center  rounded-lg text-sm`}
+                                    >
+                                        <FaClipboardList className="text-base" />
+                                        <span
+                                            className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
+                                        >
+                                            All Product
+                                        </span>
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        )}
+                    </li>
+
                 </ul>
             </nav>
         </aside>
