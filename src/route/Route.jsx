@@ -8,6 +8,7 @@ import BannerUpdate from "../pages/adimn/banner-related-page/BannerUpdate";
 import CreateProduct from "../pages/adimn/product-page/CreateProduct";
 import AllProduct from "../pages/adimn/product-page/AllProduct";
 import ProductUpdate from "../pages/adimn/product-page/ProductUpdate";
+import CreateTeam from './../pages/adimn/team-related-page/CreateTeam';
 
 export const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
             {
                 path : "product-update/:id",
                 element : <ProductUpdate></ProductUpdate>
+            },
+            {
+                path : "team-upload",
+                element : <CreateTeam></CreateTeam>
             }
         ]
     }

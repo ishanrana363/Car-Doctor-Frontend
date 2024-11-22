@@ -106,7 +106,7 @@ const Sidebar = () => {
                         )}
                     </li>
 
-                    
+
                     {/* Product Section */}
                     <li>
                         <div
@@ -156,6 +156,62 @@ const Sidebar = () => {
                                             className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
                                         >
                                             All Product
+                                        </span>
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        )}
+                    </li>
+
+                    {/* team Section */}
+                    <li>
+                        <div
+                            className="flex justify-between items-center cursor-pointer px-2 py-2  rounded-lg"
+                            onClick={() => handleMenuClick('team')}
+                        >
+                            <div className="flex items-center">
+                                {/* <FaProjectDiagram className="text-base" /> */}
+                                <span
+                                    className={`${isSidebarOpen ? 'block' : 'hidden'
+                                        } ml-2 text-sm font-medium`}
+                                >
+                                    Team
+                                </span>
+                            </div>
+                            {activeMenu === 'team' ? <MdExpandLess /> : <MdExpandMore />}
+                        </div>
+
+                        {activeMenu === 'team' && (
+                            <ul className="mx-8 ">
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/team-upload"
+                                        className={`${pathname === '/dashboard/team-upload'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
+                                            } px-2 py-1 flex items-center  rounded-lg text-sm   `}
+                                    >
+                                        <IoRocketSharp className="text-base" />
+                                        <span
+                                            className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
+                                        >
+                                            Team Member Upload
+                                        </span>
+                                    </NavLink>
+                                </li>
+                                <li className="mt-1">
+                                    <NavLink
+                                        to="/dashboard/all-member"
+                                        className={`${pathname === '/dashboard/all-member'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
+                                            } px-2 py-1 flex items-center  rounded-lg text-sm`}
+                                    >
+                                        <FaClipboardList className="text-base" />
+                                        <span
+                                            className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
+                                        >
+                                            All Team Member
                                         </span>
                                     </NavLink>
                                 </li>
