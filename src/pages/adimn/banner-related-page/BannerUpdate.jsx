@@ -4,11 +4,25 @@ import { Helmet } from 'react-helmet-async';
 import { createAlert } from '../../../helper/createAlert';
 import useAxiosPublic from './../../../hook/UseAxiosPublic';
 import Swal from 'sweetalert2';
+import { useQuery } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { updateAlert } from '../../../helper/updateAlert';
 
-const BannerUpload = () => {
+const BannerUpdate = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [loader, setLoader] = useState(false);
     const [imageUrl, setImageUrl] = useState(null);
     const axiosPublic = useAxiosPublic();
+    const { data: singleBanner = [], refetch, isLoading } = useQuery({
+        queryKey: "singleBanner",
+        queryFn: async () => {
+            let res = await axiosPublic.get(`/banner/${id}`);
+            return res.data.data;
+        },
+    });
+
+    let { image: upcommingImg } = singleBanner;
 
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
@@ -22,43 +36,44 @@ const BannerUpload = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const updateBanner = async (e) => {
         e.preventDefault();
 
         const image = e.target.image.files[0];
         const heading = e.target.heading.value;
         const title = e.target.title.value;
 
-        let imgUrl = "";
+        let updateImageUrl = upcommingImg;
 
         if (!image?.name) {
-            imgUrl = "";
+            updateImageUrl = upcommingImg;
         }
 
-        imgUrl = await uploadImg(image);
+        updateImageUrl = await uploadImg(image);
 
         const payload = {
-            image: imgUrl,
+            image: updateImageUrl,
             heading: heading,
             title: title,
         };
 
-        const resp = await createAlert();
+        const resp = await updateAlert();
 
         if (resp.isConfirmed) {
             try {
                 setLoader(true); // Start loader
-                let res = await axiosPublic.post(`/banner`, payload);
+                let res = await axiosPublic.put(`/banner/${id}`, payload);
                 setLoader(false); // Stop loader
                 if (res) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Your work has been saved",
+                        title: "Your work has been updated successfully",
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    e.target.reset();
+                    navigate("/dashboard/all-banner");
+                    refetch();
                     setImageUrl(null);
                     return;
                 }
@@ -72,16 +87,22 @@ const BannerUpload = () => {
     return (
         <>
             <Helmet>
-                <title>Dashboard | Banner Upload</title>
+                <title>Dashboard | Update Banner</title>
             </Helmet>
             <div className="flex justify-center items-center">
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={updateBanner}
                     className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md"
                 >
                     <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
-                        Upload Banner
+                        Create Entry
                     </h2>
+
+                    <div className="avatar">
+                        <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
+                            <img src={singleBanner?.image} />
+                        </div>
+                    </div>
 
                     {/* Image Upload */}
                     <div className="mb-4">
@@ -123,9 +144,10 @@ const BannerUpload = () => {
                             type="text"
                             id="heading"
                             name="heading"
+                            defaultValue={singleBanner?.heading}
                             placeholder="Enter heading"
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                            required
+
                         />
                     </div>
 
@@ -141,9 +163,9 @@ const BannerUpload = () => {
                             type="text"
                             id="title"
                             name="title"
+                            defaultValue={singleBanner?.title}
                             placeholder="Enter title"
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                            required
                         />
                     </div>
 
@@ -188,4 +210,4 @@ const BannerUpload = () => {
     );
 };
 
-export default BannerUpload;
+export default BannerUpdate;
