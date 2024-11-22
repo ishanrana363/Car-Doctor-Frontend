@@ -85,7 +85,7 @@ const BannerPage = () => {
 
             {/* Left Arrow */}
             <button
-                className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full hover:bg-gray-700"
+                className="absolute bottom-0 right-20 hover:bg-[#ff3811] transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full "
                 onClick={handlePrev}
             >
                 <FaArrowLeftLong size={20} />
@@ -93,7 +93,7 @@ const BannerPage = () => {
 
             {/* Right Arrow */}
             <button
-                className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full hover:bg-gray-700"
+                className="absolute bottom-0 right-4 hover:bg-[#ff3811] transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full "
                 onClick={handleNext}
             >
                 <FaArrowRightLong size={20} />
