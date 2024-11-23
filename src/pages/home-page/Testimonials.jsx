@@ -1,49 +1,59 @@
 import React, { useState } from "react";
+import useAxiosPublic from './../../hook/UseAxiosPublic';
+import { useQuery } from "react-query";
 
-const testimonials = [
-    {
-        name: "Awlad Hossain",
-        role: "Businessman",
-        feedback:
-            "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
-        image: "https://via.placeholder.com/50",
-        rating: 5,
-    },
-    {
-        name: "John Doe",
-        role: "Entrepreneur",
-        feedback:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        image: "https://via.placeholder.com/50",
-        rating: 4,
-    },
-    {
-        name: "Jane Smith",
-        role: "Designer",
-        feedback:
-            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.",
-        image: "https://via.placeholder.com/50",
-        rating: 5,
-    },
-    {
-        name: "Alice Brown",
-        role: "Developer",
-        feedback:
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-        image: "https://via.placeholder.com/50",
-        rating: 3,
-    },
-    {
-        name: "Robert Johnson",
-        role: "Engineer",
-        feedback:
-            "Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-        image: "https://via.placeholder.com/50",
-        rating: 4,
-    },
-];
+// const testimonials = [
+//     {
+//         name: "Awlad Hossain",
+//         role: "Businessman",
+//         feedback:
+//             "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
+//         image: "https://via.placeholder.com/50",
+//         rating: 5,
+//     },
+//     {
+//         name: "John Doe",
+//         role: "Entrepreneur",
+//         feedback:
+//             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+//         image: "https://via.placeholder.com/50",
+//         rating: 4,
+//     },
+//     {
+//         name: "Jane Smith",
+//         role: "Designer",
+//         feedback:
+//             "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.",
+//         image: "https://via.placeholder.com/50",
+//         rating: 5,
+//     },
+//     {
+//         name: "Alice Brown",
+//         role: "Developer",
+//         feedback:
+//             "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+//         image: "https://via.placeholder.com/50",
+//         rating: 3,
+//     },
+//     {
+//         name: "Robert Johnson",
+//         role: "Engineer",
+//         feedback:
+//             "Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+//         image: "https://via.placeholder.com/50",
+//         rating: 4,
+//     },
+// ];
 
 export default function TestimonialSlider() {
+    const axiosPublic = useAxiosPublic()
+    const { data: testimonials = [], refetch, isLoading } = useQuery({
+        queryKey: "testimonials",
+        queryFn: async () => {
+            let res = await axiosPublic.get("/review");
+            return res.data.data;
+        },
+    });
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const nextTestimonial = () => {
@@ -88,24 +98,24 @@ export default function TestimonialSlider() {
                             className="flex flex-col items-center text-center border rounded-lg p-4"
                         >
                             <img
-                                src={testimonial.image}
-                                alt={testimonial.name}
+                                src={testimonial?.img}
+                                alt={testimonial?.name}
                                 className="w-16 h-16 rounded-full border-2 border-gray-300"
                             />
                             <h3 className="mt-4 text-lg font-semibold">
-                                {testimonial.name}
+                                {testimonial?.name}
                             </h3>
-                            <p className="text-sm text-gray-500">{testimonial.role}</p>
+                            <p className="text-sm text-gray-500">{testimonial?.profession}</p>
                             <div className="my-auto h-40 text-justify " >
-                            <p className="mt-4 text-gray-600">{testimonial.feedback}</p>
+                            <p className="mt-4 text-gray-600">{testimonial?.comment}</p>
                             </div>
-                            <div className="flex mt-4">
+                            {/* <div className="flex mt-4">
                                 {[...Array(testimonial.rating)].map((_, idx) => (
                                     <span key={idx} className="text-yellow-500 text-lg">
                                         ★
                                     </span>
                                 ))}
-                            </div>
+                            </div> */}
                         </div>
                     ))}
                 </div>
