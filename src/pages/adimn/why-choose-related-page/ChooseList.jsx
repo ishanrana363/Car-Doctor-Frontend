@@ -57,7 +57,7 @@ const ChooseList = () => {
                 <table className="min-w-full bg-white rounded-lg shadow-md">
                     <thead>
                         <tr className="bg-gray-800 text-white">
-                            <th className="py-3 px-6 text-left">Image</th>
+                            <th className="py-3 px-6 text-left">Icon</th>
                             <th className="py-3 px-6 text-left">Name</th>
                             <th className="py-3 px-6 text-center">Actions</th>
                         </tr>
@@ -69,7 +69,7 @@ const ChooseList = () => {
                                 {/*  Image */}
                                 <td className="py-3 px-6">
                                     <img
-                                        src={item.img}
+                                        src={item.icon}
                                         alt={item.name}
                                         className="w-16 h-16 object-cover rounded-md"
                                     />

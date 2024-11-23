@@ -4,11 +4,28 @@ import { Helmet } from 'react-helmet-async';
 import { createAlert } from '../../../helper/createAlert';
 import useAxiosPublic from './../../../hook/UseAxiosPublic';
 import Swal from 'sweetalert2';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { updateAlert } from '../../../helper/updateAlert';
 
-const ChooseUpload = () => {
+const ChooseUpdate = () => {
     const [loader, setLoader] = useState(false);
     const [imageUrl, setImageUrl] = useState(null);
     const axiosPublic = useAxiosPublic();
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const { data: singleChooseData = [], refetch, isLoading } = useQuery({
+        queryKey: "singleChooseData",
+        queryFn: async () => {
+            let res = await axiosPublic.get(`/choose/${id}`);
+            return res.data.data;
+        },
+    });
+
+    console.log(singleChooseData);
+
+    const { icon: upcommingIcon } = singleChooseData;
 
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
@@ -28,10 +45,10 @@ const ChooseUpload = () => {
         const icon = e.target.icon.files[0];
         const name = e.target.name.value;
 
-        let imgUrl = "";
+        let imgUrl = upcommingIcon;
 
         if (!icon?.name) {
-            imgUrl = "";
+            imgUrl = upcommingIcon;
         }
 
         imgUrl = await uploadImg(icon);
@@ -42,23 +59,25 @@ const ChooseUpload = () => {
 
         };
 
-        const resp = await createAlert();
+        const resp = await updateAlert();
 
         if (resp.isConfirmed) {
             try {
                 setLoader(true); // Start loader
-                let res = await axiosPublic.post(`/choose`, payload);
+                let res = await axiosPublic.put(`/choose/${id}`, payload);
                 setLoader(false); // Stop loader
                 if (res) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Your choose has been saved",
+                        title: "Your choose has been updated successfully",
                         showConfirmButton: false,
                         timer: 1500,
                     });
                     e.target.reset();
                     setImageUrl(null);
+                    refetch();
+                    navigate("/dashboard/all-choose")
                     return;
                 }
             } catch (error) {
@@ -71,7 +90,7 @@ const ChooseUpload = () => {
     return (
         <>
             <Helmet>
-                <title>Dashboard | Upload Why Choose Us</title>
+                <title>Dashboard | Update Why Choose Us</title>
             </Helmet>
             <div className="flex justify-center items-center border-2 border-blue-600 ">
                 <form
@@ -79,8 +98,14 @@ const ChooseUpload = () => {
                     className="bg-white shadow-lg rounded-lg p-6 w-full "
                 >
                     <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
-                        Upload Why Choose Us
+                        Update Why Choose Us
                     </h2>
+
+                    <div className="avatar">
+                        <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
+                            <img src= { singleChooseData?.icon } />
+                        </div>
+                    </div>
 
                     <div className='flex gap-8' >
                         {/* Upload icon */}
@@ -115,7 +140,7 @@ const ChooseUpload = () => {
                                 name="name"
                                 placeholder="Enter  name"
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                required
+                                defaultValue={singleChooseData?.name}
                             />
                         </div>
                     </div>
@@ -175,4 +200,4 @@ const ChooseUpload = () => {
     );
 };
 
-export default ChooseUpload;
+export default ChooseUpdate;
