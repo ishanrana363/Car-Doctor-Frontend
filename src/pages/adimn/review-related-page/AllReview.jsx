@@ -86,7 +86,7 @@ const AllReview = () => {
                                 <td className="py-3 mt-4 px-6 text-center flex justify-center items-center space-x-4">
                                     {/* Edit Button with Tooltip */}
                                     <div className="relative group">
-                                        <Link to={`/dashboard/product-update/${item._id}`}>
+                                        <Link to={`/dashboard/review-update/${item._id}`}>
                                             <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-md flex items-center">
                                                 <FaEdit />
                                             </button>
