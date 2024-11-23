@@ -268,7 +268,63 @@ const Sidebar = () => {
                                         <span
                                             className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
                                         >
-                                            All Review 
+                                            All Review
+                                        </span>
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        )}
+                    </li>
+
+                    {/* review Section */}
+                    <li>
+                        <div
+                            className="flex justify-between items-center cursor-pointer px-2 py-2  rounded-lg"
+                            onClick={() => handleMenuClick('Choose')}
+                        >
+                            <div className="flex items-center">
+                                {/* <FaProjectDiagram className="text-base" /> */}
+                                <span
+                                    className={`${isSidebarOpen ? 'block' : 'hidden'
+                                        } ml-2 text-sm font-medium`}
+                                >
+                                    Choose
+                                </span>
+                            </div>
+                            {activeMenu === 'Choose' ? <MdExpandLess /> : <MdExpandMore />}
+                        </div>
+
+                        {activeMenu === 'Choose' && (
+                            <ul className="mx-8 ">
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/choose-upload"
+                                        className={`${pathname === '/dashboard/choose-upload'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
+                                            } px-2 py-1 flex items-center  rounded-lg text-sm   `}
+                                    >
+                                        <IoRocketSharp className="text-base" />
+                                        <span
+                                            className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
+                                        >
+                                            Choose Upload
+                                        </span>
+                                    </NavLink>
+                                </li>
+                                <li className="mt-1">
+                                    <NavLink
+                                        to="/dashboard/all-choose"
+                                        className={`${pathname === '/dashboard/all-choose'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
+                                            } px-2 py-1 flex items-center  rounded-lg text-sm`}
+                                    >
+                                        <FaClipboardList className="text-base" />
+                                        <span
+                                            className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
+                                        >
+                                            All Choose
                                         </span>
                                     </NavLink>
                                 </li>

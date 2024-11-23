@@ -14,6 +14,7 @@ import TeamMemberUpdate from "../pages/adimn/team-related-page/TeamMemberUpdate"
 import CreateReview from "../pages/adimn/review-related-page/CreateReview";
 import AllReview from "../pages/adimn/review-related-page/AllReview";
 import ReviewUpdate from "../pages/adimn/review-related-page/ReviewUpdate";
+import ChooseUpload from "../pages/adimn/why-choose-related-page/ChooseUpload";
 
 export const router = createBrowserRouter([
     {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
             {
                 path : "review-update/:id",
                 element : <ReviewUpdate></ReviewUpdate>
+            },
+            {
+                path : "choose-upload",
+                element : <ChooseUpload></ChooseUpload>
             }
         ]
     }
