@@ -19,6 +19,7 @@ import ChooseList from "../pages/adimn/why-choose-related-page/ChooseList";
 import ChooseUpdate from "../pages/adimn/why-choose-related-page/ChooseUpdate";
 import CreateService from "../pages/adimn/service-related-page/CreateService";
 import ServiceList from "../pages/adimn/service-related-page/ServiceList";
+import ServiceUpdate from "../pages/adimn/service-related-page/ServiceUpdate";
 
 export const router = createBrowserRouter([
     {
@@ -103,6 +104,10 @@ export const router = createBrowserRouter([
             {
                 path : "all-service",
                 element : <ServiceList></ServiceList>
+            },
+            {
+                path : "service-update/:id",
+                element : <ServiceUpdate></ServiceUpdate>
             }
         ]
     }

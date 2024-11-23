@@ -25,7 +25,7 @@ const ServiceList = () => {
         if (resp.isConfirmed) {
             try {
                 // Delete product by ID
-                let res = await axiosPublic.delete(`/product/${id}`);
+                let res = await axiosPublic.delete(`/service/${id}`);
                 if (res) {
                     Swal.fire({
                         title: "Deleted!",
@@ -67,23 +67,23 @@ const ServiceList = () => {
                     </thead>
                     <tbody>
                         {/* Loop through serviceList and render table rows */}
-                        {serviceList.map((item) => (
+                        {serviceList && serviceList.map((item) => (
                             <tr key={item._id} className="border-b border-teal-400">
                                 {/* Product Image */}
                                 <td className="py-3 px-6">
                                     <img
-                                        src={item.img}
-                                        alt={item.name}
+                                        src={item?.img}
+                                        alt={item?.name}
                                         className="w-16 h-16 object-cover rounded-md"
                                     />
                                 </td>
                                 {/* Product Name */}
-                                <td className="py-3 px-6">{item.service_name}</td>
+                                <td className="py-3 px-6">{item?.service_name}</td>
                                 {/* Product Rating */}
-                                <td className="py-3 px-6">{item.service_price}</td>
+                                <td className="py-3 px-6">{item?.service_price}</td>
                                 {/* Product Price */}
-                                <td className="py-3 px-6">{item.service_title}</td>
-                                <td className="py-3 px-6">{item.service_type}</td>
+                                <td className="py-3 px-6">{item?.service_title}</td>
+                                <td className="py-3 px-6">{item?.service_type}</td>
                                 {/* Actions */}
                                 <td className="py-3 mt-4 px-6 text-center flex justify-center items-center space-x-4">
                                     {/* Edit Button with Tooltip */}
