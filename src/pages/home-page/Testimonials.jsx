@@ -64,18 +64,18 @@ export default function TestimonialSlider() {
     ];
 
     return (
-        <div className="flex flex-col items-center justify-center p-6 bg-gray-100">
+        <div className="flex flex-col items-center justify-center  py-6">
             <div className="relative max-w-6xl w-full bg-white p-6 rounded-lg shadow-md">
                 {/* Navigation Arrows */}
                 <button
                     onClick={prevTestimonial}
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full hover:bg-gray-300 focus:outline-none"
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-1 hover:bg-[#FF3811] rounded-full  focus:outline-none"
                 >
                     ←
                 </button>
                 <button
                     onClick={nextTestimonial}
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full hover:bg-gray-300 focus:outline-none"
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-1 rounded-full hover:bg-[#FF3811]  focus:outline-none"
                 >
                     →
                 </button>
@@ -96,7 +96,9 @@ export default function TestimonialSlider() {
                                 {testimonial.name}
                             </h3>
                             <p className="text-sm text-gray-500">{testimonial.role}</p>
+                            <div className="my-auto h-40 text-justify " >
                             <p className="mt-4 text-gray-600">{testimonial.feedback}</p>
+                            </div>
                             <div className="flex mt-4">
                                 {[...Array(testimonial.rating)].map((_, idx) => (
                                     <span key={idx} className="text-yellow-500 text-lg">

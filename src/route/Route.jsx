@@ -11,6 +11,8 @@ import ProductUpdate from "../pages/adimn/product-page/ProductUpdate";
 import CreateTeam from './../pages/adimn/team-related-page/CreateTeam';
 import TeamMemberList from "../pages/adimn/team-related-page/TeamMemberList";
 import TeamMemberUpdate from "../pages/adimn/team-related-page/TeamMemberUpdate";
+import CreateReview from "../pages/adimn/review-related-page/CreateReview";
+import AllReview from "../pages/adimn/review-related-page/AllReview";
 
 export const router = createBrowserRouter([
     {
@@ -63,6 +65,14 @@ export const router = createBrowserRouter([
             {
                 path :"team-member-update/:id",
                 element : <TeamMemberUpdate></TeamMemberUpdate>
+            },
+            {
+                path : "review-upload",
+                element : <CreateReview></CreateReview>
+            },
+            {
+                path :"all-review",
+                element : <AllReview></AllReview>
             }
         ]
     }
