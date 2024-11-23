@@ -276,7 +276,7 @@ const Sidebar = () => {
                         )}
                     </li>
 
-                    {/* review Section */}
+                    {/* choose us Section */}
                     <li>
                         <div
                             className="flex justify-between items-center cursor-pointer px-2 py-2  rounded-lg"
@@ -325,6 +325,63 @@ const Sidebar = () => {
                                             className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
                                         >
                                             All Choose
+                                        </span>
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        )}
+                    </li>
+                        
+                        {/* servuce section */}
+
+                    <li>
+                        <div
+                            className="flex justify-between items-center cursor-pointer px-2 py-2  rounded-lg"
+                            onClick={() => handleMenuClick('service')}
+                        >
+                            <div className="flex items-center">
+                                {/* <FaProjectDiagram className="text-base" /> */}
+                                <span
+                                    className={`${isSidebarOpen ? 'block' : 'hidden'
+                                        } ml-2 text-sm font-medium`}
+                                >
+                                    Service
+                                </span>
+                            </div>
+                            {activeMenu === 'service' ? <MdExpandLess /> : <MdExpandMore />}
+                        </div>
+
+                        {activeMenu === 'service' && (
+                            <ul className="mx-8 ">
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/service-upload"
+                                        className={`${pathname === '/dashboard/service-upload'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
+                                            } px-2 py-1 flex items-center  rounded-lg text-sm   `}
+                                    >
+                                        <IoRocketSharp className="text-base" />
+                                        <span
+                                            className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
+                                        >
+                                            Service Upload
+                                        </span>
+                                    </NavLink>
+                                </li>
+                                <li className="mt-1">
+                                    <NavLink
+                                        to="/dashboard/all-service"
+                                        className={`${pathname === '/dashboard/all-service'
+                                            ? 'bg-[#55679C] text-white'
+                                            : 'bg-white text-[#4040f6]'
+                                            } px-2 py-1 flex items-center  rounded-lg text-sm`}
+                                    >
+                                        <FaClipboardList className="text-base" />
+                                        <span
+                                            className={`${isSidebarOpen ? 'ml-2' : 'hidden'}`}
+                                        >
+                                            All Service
                                         </span>
                                     </NavLink>
                                 </li>

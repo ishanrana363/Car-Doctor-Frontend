@@ -17,6 +17,7 @@ import ReviewUpdate from "../pages/adimn/review-related-page/ReviewUpdate";
 import ChooseUpload from "../pages/adimn/why-choose-related-page/ChooseUpload";
 import ChooseList from "../pages/adimn/why-choose-related-page/ChooseList";
 import ChooseUpdate from "../pages/adimn/why-choose-related-page/ChooseUpdate";
+import CreateService from "../pages/adimn/service-related-page/CreateService";
 
 export const router = createBrowserRouter([
     {
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
             {
                 path : "choose-update/:id",
                 element : <ChooseUpdate></ChooseUpdate>
+            },
+            {
+                path : "service-upload",
+                element : <CreateService></CreateService>
             }
         ]
     }
