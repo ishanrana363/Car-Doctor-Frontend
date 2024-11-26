@@ -17,15 +17,15 @@ const Header = () => {
           {/* Logo */}
           <div>
             <Link to={"/"}>
-              <img className="lg:w-24 w-16"
-                src="https://res.cloudinary.com/dj2edy2rg/image/upload/v1732199952/Group_2_uu20u7.svg"
+              <img className="md:w-24 w-16" 
+                src="https://res.cloudinary.com/dj2edy2rg/image/upload/v1732199952/Group_2_uu20u7.svg" 
                 alt="Logo"
               />
             </Link>
           </div>
 
           {/* Hamburger Menu for Small Devices */}
-          <div className="lg:hidden">
+          <div className="md:hidden mr-10 ">
             <button onClick={toggleDrawer}>
               {isDrawerOpen ? (
                 <MdClose className="w-6 h-6 text-black" />  // Close icon when the drawer is open
@@ -36,7 +36,7 @@ const Header = () => {
           </div>
 
           {/* Navigation Links for Large Devices */}
-          <div className="hidden lg:block">
+          <div className="hidden md:block">
             <nav>
               <ul className="flex items-center gap-4">
                 <li><NavLink to={"/"}>Home</NavLink></li>
@@ -49,7 +49,7 @@ const Header = () => {
           </div>
 
           {/* Search Icons and Appointment Button for Large Devices */}
-          <div className="hidden lg:block">
+          <div className="hidden md:block">
             <nav>
               <ul className="flex items-center justify-center gap-5">
                 <li>

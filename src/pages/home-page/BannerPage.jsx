@@ -1,23 +1,19 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import { useQuery } from 'react-query'
+import { useQuery } from 'react-query';
 import useAxiosPublic from "../../hook/UseAxiosPublic";
 
 const BannerPage = () => {
-    const axiosPublic = useAxiosPublic()
-    
+    const axiosPublic = useAxiosPublic();
 
-    const {data : carouselItems = []} = useQuery({
+    // Fetch carousel items from the API
+    const { data: carouselItems = [], isLoading, isError } = useQuery({
         queryKey: 'carouselItems',
         queryFn: async () => {
             let res = await axiosPublic.get(`/banner`);
             return res.data.data;
         },
     });
-
-
-
-
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -41,48 +37,61 @@ const BannerPage = () => {
 
         // Clear the interval when the component is unmounted
         return () => clearInterval(interval);
-    }, [currentIndex]); // Dependency on currentIndex ensures that it updates correctly
+    }, [currentIndex]);
+
+    // Handle loading or error states
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isError) {
+        return <div>Error loading carousel items.</div>;
+    }
 
     return (
-        <div className="relative bg-gray-900 text-white h-screen">
+        <div className="relative border-2  w-full border-red-700  text-white md:h-screen">
             {/* Carousel Item */}
-            <div
-                className="relative w-full h-full flex items-center justify-center bg-cover bg-center transition-all duration-500"
-                style={{ backgroundImage: `url(${carouselItems[currentIndex]?.image})` }}
-            >
-                <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-                <div className="relative z-10 text-center p-8 max-w-xl">
-                    <h1 className="text-4xl font-bold mb-4">
-                        {carouselItems[currentIndex]?.heading}
-                    </h1>
-                    <p className="text-gray-300 mb-6">
-                        {carouselItems[currentIndex]?.title}
-                    </p>
-                    <div className="flex space-x-4 justify-center">
-                        <button className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">
-                            Discover More
-                        </button>
-                        <button className="bg-transparent border border-white py-2 px-4 rounded hover:bg-gray-800">
-                            Latest Project
-                        </button>
+            {carouselItems.length > 0 && (
+                <div
+                    className="relative w-full py-8 md:py-0  h-full flex items-center justify-center bg-cover bg-center transition-all duration-500"
+                    style={{ backgroundImage: `url(${carouselItems[currentIndex]?.image})` }}
+                >
+                    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                    <div className="relative z-10 text-center md:p-8 p-2 max-w-xl">
+                        <h1 className="md:text-4xl text-[15px]  font-bold md:mb-4">
+                            {carouselItems[currentIndex]?.heading}
+                        </h1>
+                        <p className="text-gray-300  md:text-[16px] text-[10px] md:mb-6">
+                            {carouselItems[currentIndex]?.title}
+                        </p>
+                        <div className="flex space-x-2 mt-2 justify-center">
+                            <button className="bg-red-500 text-xs md:text-base text-white py-1 px-3 rounded hover:bg-red-600">
+                                Discover More
+                            </button>
+                            <button className="bg-transparent border border-white text-xs md:text-base py-1 px-3 rounded hover:bg-gray-800">
+                                Latest Project
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
 
             {/* Left Arrow */}
             <button
-                className="absolute bottom-0 right-20 hover:bg-[#ff3811] transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full "
+                className="absolute   md:bottom-0 md:right-36  right-24 hover:bg-[#ff3811] transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
                 onClick={handlePrev}
+                disabled={isLoading || carouselItems.length === 0}
             >
-                <FaArrowLeftLong size={20} />
+                <FaArrowLeftLong className="md:text-[20px] text-[15px]" />
             </button>
 
             {/* Right Arrow */}
             <button
-                className="absolute bottom-0 right-4 hover:bg-[#ff3811] transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full "
+                className="absolute md:bottom-0 right-4 md:right-20 hover:bg-[#ff3811] transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
                 onClick={handleNext}
+                disabled={isLoading || carouselItems.length === 0}
             >
-                <FaArrowRightLong size={20} />
+                <FaArrowRightLong className="md:text-[20px] text-[15px]" />
             </button>
         </div>
     );

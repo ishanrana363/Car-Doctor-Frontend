@@ -20,95 +20,102 @@ import ChooseUpdate from "../pages/adimn/why-choose-related-page/ChooseUpdate";
 import CreateService from "../pages/adimn/service-related-page/CreateService";
 import ServiceList from "../pages/adimn/service-related-page/ServiceList";
 import ServiceUpdate from "../pages/adimn/service-related-page/ServiceUpdate";
+import Login from "../components/Login/Login";
 
 export const router = createBrowserRouter([
+
     {
-        path : "/",
-        
-        element : <Layout></Layout>,
-        children : [
+        path: "/",
+
+        element: <Layout></Layout>,
+        children: [
             {
-                path : "/",
-                element : <HomePage></HomePage>
+                path: "/",
+                element: <HomePage></HomePage>
             }
         ]
     },
     {
-        path : "/dashboard",
-        element : <AdminLayout></AdminLayout>,
-        children : [
+        path: "/dashboard",
+        element: <AdminLayout></AdminLayout>,
+        children: [
             {
-                path : "banner-upload",
-                element : <BannerUpload></BannerUpload>
+                path: "banner-upload",
+                element: <BannerUpload></BannerUpload>
             },
             {
-                path : "all-banner",
-                element : <BannerList></BannerList>
+                path: "all-banner",
+                element: <BannerList></BannerList>
             },
             {
-                path : "banner-update/:id",
-                element : <BannerUpdate></BannerUpdate>
+                path: "banner-update/:id",
+                element: <BannerUpdate></BannerUpdate>
             },
             {
-                path : "product-upload",
-                element : <CreateProduct></CreateProduct>
+                path: "product-upload",
+                element: <CreateProduct></CreateProduct>
             },
             {
-                path : "all-products",
-                element : <AllProduct></AllProduct>
+                path: "all-products",
+                element: <AllProduct></AllProduct>
             },
             {
-                path : "product-update/:id",
-                element : <ProductUpdate></ProductUpdate>
+                path: "product-update/:id",
+                element: <ProductUpdate></ProductUpdate>
             },
             {
-                path : "team-upload",
-                element : <CreateTeam></CreateTeam>
+                path: "team-upload",
+                element: <CreateTeam></CreateTeam>
             },
             {
-                path : "all-member",
-                element : <TeamMemberList></TeamMemberList>
+                path: "all-member",
+                element: <TeamMemberList></TeamMemberList>
             },
             {
-                path :"team-member-update/:id",
-                element : <TeamMemberUpdate></TeamMemberUpdate>
+                path: "team-member-update/:id",
+                element: <TeamMemberUpdate></TeamMemberUpdate>
             },
             {
-                path : "review-upload",
-                element : <CreateReview></CreateReview>
+                path: "review-upload",
+                element: <CreateReview></CreateReview>
             },
             {
-                path :"all-review",
-                element : <AllReview></AllReview>
+                path: "all-review",
+                element: <AllReview></AllReview>
             },
             {
-                path : "review-update/:id",
-                element : <ReviewUpdate></ReviewUpdate>
+                path: "review-update/:id",
+                element: <ReviewUpdate></ReviewUpdate>
             },
             {
-                path : "choose-upload",
-                element : <ChooseUpload></ChooseUpload>
+                path: "choose-upload",
+                element: <ChooseUpload></ChooseUpload>
             },
             {
-                path :"all-choose",
-                element : <ChooseList></ChooseList>
+                path: "all-choose",
+                element: <ChooseList></ChooseList>
             },
             {
-                path : "choose-update/:id",
-                element : <ChooseUpdate></ChooseUpdate>
+                path: "choose-update/:id",
+                element: <ChooseUpdate></ChooseUpdate>
             },
             {
-                path : "service-upload",
-                element : <CreateService></CreateService>
+                path: "service-upload",
+                element: <CreateService></CreateService>
             },
             {
-                path : "all-service",
-                element : <ServiceList></ServiceList>
+                path: "all-service",
+                element: <ServiceList></ServiceList>
             },
             {
-                path : "service-update/:id",
-                element : <ServiceUpdate></ServiceUpdate>
+                path: "service-update/:id",
+                element: <ServiceUpdate></ServiceUpdate>
             }
         ]
-    }
+    },
+    {
+        path: "/login",
+        element: <Login></Login>
+    },
+
 ]);

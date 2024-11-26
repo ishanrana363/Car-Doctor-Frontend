@@ -27,45 +27,47 @@ const ServiceArea = () => {
     };
 
     return (
-        <div className="w-11/12 mx-auto">
+        <div className="w-11/12 my-5 lg:my-10 mx-auto">
             <div className="">
                 {/* Title Section */}
                 <div className="text-center mb-6">
-                    <h2 className="text-red-500 text-lg font-semibold mb-2">Service</h2>
-                    <h1 className="text-3xl font-bold mb-4">Our Service Area</h1>
-                    <p className="text-gray-600">
+                    <h2 className="text-red-500 md:text-lg text-[13px] font-semibold md:mb-2">Service</h2>
+                    <h1 className="md:text-4xl font-bold md:mb-4">Our Service Area</h1>
+                    <p className="text-gray-600 text-justify md:text-[16px] text-[10px] md:text-center ">
                         The Majority Have Suffered Alteration In Some Form, By Injected
                         Humour, Or Randomised Words Which Don't Look Even Slightly Believable.
                     </p>
                 </div>
 
                 {/* Service Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
                     {services.slice(0, visibleServices).map((service, index) => (
                         <div
                             key={index}
                             className="border rounded-lg mb-4 p-4 shadow-md overflow-hidden bg-white hover:shadow-lg transition-shadow"
                         >
-                            <img
-                                src={service.img}
-                                alt={service.title}
-                                className="w-full h-48 object-cover"
-                            />
-                            <div className="p-4">
-                                <h3 className="text-xl font-semibold mb-2">{service.service_name}</h3>
+                            <div className="md:h-52 my-auto " >
+                                <img
+                                    src={service.img}
+                                    alt={service.title}
+                                    className="lg:w-full h-auto mx-auto lg:h-48 object-cover"
+                                />
+                            </div>
+                            <div className="md:p-4 p-2 ">
+                                <h3 className="md:text-xl text-[12px] font-semibold md:mb-2">{service.service_name}</h3>
                                 <div className="flex justify-between items-center">
                                     <div>
-                                        <p className="text-[#FF3811] font-medium">
+                                        <p className="text-[#FF3811] md:text-xl text-[12px] font-semibold">
                                             Price: {service.service_price}
                                         </p>
                                     </div>
 
                                     <div className="flex justify-end">
-                                        <button className="text-red-500 text-xl font-bold">→</button>
+                                        <button className="text-red-500 md:text-xl text-[12px] font-semibold">→</button>
                                     </div>
                                 </div>
                                 <div>
-                                    <p className="text-[#FF3811] font-medium">
+                                    <p className="text-[#FF3811] md:text-xl text-[12px] font-semibold">
                                         Service Type: {service.service_type}
                                     </p>
                                 </div>
