@@ -2,6 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Login = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        // Perform your login logic here
+    }
     return (
         <div>
             <div className="hero bg-base-200 min-h-screen">
@@ -11,7 +15,7 @@ const Login = () => {
                     </div>
                     <div className="card  w-full max-w-sm shrink-0 shadow-2xl">
                         <h1 className="text-3xl text-center mt-6  font-bold">Login now!</h1>
-                        <form>
+                        <form onSubmit={handleSubmit} >
                             <form className="card-body">
                                 <div className="form-control">
                                     <label className="label">
