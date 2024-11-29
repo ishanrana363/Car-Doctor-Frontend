@@ -25,12 +25,7 @@ const CreateService = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const img = e.target.img.files[0];
-        const service_name = e.target.service_name.value;
-        const service_price  = e.target.service_price.value;
-        const service_title = e.target.service_title.value;
-        const service_type = e.target.service_type.value;
-        const product_description = e.target.product_description.value;
+        
 
         let imgUrl = "";
 
@@ -38,16 +33,7 @@ const CreateService = () => {
             imgUrl = "";
         }
 
-        imgUrl = await uploadImg(img);
-
-        const payload = {
-            img: imgUrl,
-            service_name,
-            service_price,
-            service_title,
-            service_type,
-            product_description,
-        };
+        
 
         const resp = await createAlert();
 
@@ -89,123 +75,7 @@ const CreateService = () => {
                         Upload Service
                     </h2>
 
-                    {/* Img Upload */}
-                    <div className="mb-4 w-1/2 ">
-                        <label
-                            htmlFor="img"
-                            className="block text-sm font-medium text-gray-700 mb-2"
-                        >
-                            Upload Image
-                        </label>
-                        <input
-                            type="file"
-                            id="img"
-                            name="img"
-                            onChange={handleImageUpload}
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        {imageUrl && (
-                            <div className="mb-4">
-                                <span className="text-gray-700">Selected Image:</span>
-                                <img
-                                    src={imageUrl}
-                                    alt="Uploaded"
-                                    className="mt-2 w-16 h-auto rounded-md border"
-                                />
-                            </div>
-                        )}
-                    </div>
-
-                    <div className='flex items-center justify-between gap-8   ' >
-                        {/* service  name */}
-                        <div className="mb-4 w-full ">
-                            <label
-                                htmlFor="service_name"
-                                className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                                Service Name
-                            </label>
-                            <input
-                                type="text"
-                                id="service_name"
-                                name="service_name"
-                                placeholder="Enter service_name "
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                required
-                            />
-                        </div>
-
-                        {/* Service price */}
-                        <div className="mb-4 w-full ">
-                            <label
-                                htmlFor="service_price"
-                                className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                                Service Price
-                            </label>
-                            <input
-                                type="text"
-                                id="service_price"
-                                name="service_price"
-                                placeholder="Enter service_price"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                required
-                            />
-                        </div>
-                    </div>
-
-                    <div className='flex gap-8' >
-                        {/* service_title */}
-                        <div className="mb-4 w-1/2 ">
-                            <label
-                                htmlFor="service_title"
-                                className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                                Service Title
-                            </label>
-                            <input
-                                type="text"
-                                id="service_title"
-                                name="service_title"
-                                placeholder="Enter  service title"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                required
-                            />
-                        </div>
-                        {/* service_type */}
-                        <div className="mb-4 w-1/2 ">
-                            <label
-                                htmlFor="service_type"
-                                className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                                Service Type
-                            </label>
-                            <input
-                                type="text"
-                                id="service_type"
-                                name="service_type"
-                                placeholder="Enter  service type"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div className="mb-4 ">
-                        <label
-                            htmlFor="product_description"
-                            className="block text-sm font-medium text-gray-700 mb-2"
-                        >
-                            Product Description
-                        </label>
-                        <textarea
-                            id="product_description"
-                            name="product_description"
-                            placeholder="Enter product description "
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                            rows="7"
-                            required
-                        ></textarea>
-                    </div>
+                    
 
                     {/* Submit Button */}
                     <button

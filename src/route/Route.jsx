@@ -22,7 +22,9 @@ import ServiceList from "../pages/adimn/service-related-page/ServiceList";
 import ServiceUpdate from "../pages/adimn/service-related-page/ServiceUpdate";
 import Login from "../components/Login/Login";
 import SignUp from "../components/SignUp/SignUp";
-import ServiceDetails from "../pages/adimn/service-details-page/ServiceDetails";
+import ServiceDetails from "../pages/adimn/service-details-page/ServiceDetailsUpload";
+import ServiceDetailsUpload from "../pages/adimn/service-details-page/ServiceDetailsUpload";
+import ServiceDetailsList from "../pages/service-details/ServiceDetailsList";
 
 export const router = createBrowserRouter([
 
@@ -115,8 +117,9 @@ export const router = createBrowserRouter([
             },
             {
                 path : "service-details/:id",
-                element : <ServiceDetails></ServiceDetails>
-            }
+                element : <ServiceDetailsUpload></ServiceDetailsUpload>
+            },
+
         ]
     },
     {
@@ -126,6 +129,10 @@ export const router = createBrowserRouter([
     {
         path : "/sign-up",
         element : <SignUp></SignUp>
+    },
+    {
+        path : "/service-details/:id",
+        element : <ServiceDetailsList></ServiceDetailsList>
     }
 
 ]);

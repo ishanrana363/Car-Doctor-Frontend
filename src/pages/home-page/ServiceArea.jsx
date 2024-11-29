@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAxiosPublic from './../../hook/UseAxiosPublic';
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 
 const ServiceArea = () => {
     const axiosPublic = useAxiosPublic();
@@ -46,32 +47,34 @@ const ServiceArea = () => {
                             key={index}
                             className="border rounded-lg mb-4 p-4 shadow-md overflow-hidden bg-white hover:shadow-lg transition-shadow"
                         >
-                            <div className="md:h-52 my-auto " >
-                                <img
-                                    src={service.img}
-                                    alt={service.title}
-                                    className="lg:w-full h-auto mx-auto lg:h-48 object-cover"
-                                />
-                            </div>
-                            <div className="md:p-4 p-2 ">
-                                <h3 className="md:text-xl text-[12px] font-semibold md:mb-2">{service.service_name}</h3>
-                                <div className="flex justify-between items-center">
+                            <Link to={`/service-details/${service?._id}`}>
+                                <div className="md:h-52 my-auto " >
+                                    <img
+                                        src={service.img}
+                                        alt={service.title}
+                                        className="lg:w-full h-auto mx-auto lg:h-48 object-cover"
+                                    />
+                                </div>
+                                <div className="md:p-4 p-2 ">
+                                    <h3 className="md:text-xl text-[12px] font-semibold md:mb-2">{service.service_name}</h3>
+                                    <div className="flex justify-between items-center">
+                                        <div>
+                                            <p className="text-[#FF3811] md:text-xl text-[12px] font-semibold">
+                                                Price: {service.service_price}b
+                                            </p>
+                                        </div>
+
+                                        <div className="flex justify-end">
+                                            <button className="text-red-500 md:text-xl text-[12px] font-semibold">→</button>
+                                        </div>
+                                    </div>
                                     <div>
                                         <p className="text-[#FF3811] md:text-xl text-[12px] font-semibold">
-                                            Price: {service.service_price}
+                                            Service Type: {service.service_type}
                                         </p>
                                     </div>
-
-                                    <div className="flex justify-end">
-                                        <button className="text-red-500 md:text-xl text-[12px] font-semibold">→</button>
-                                    </div>
                                 </div>
-                                <div>
-                                    <p className="text-[#FF3811] md:text-xl text-[12px] font-semibold">
-                                        Service Type: {service.service_type}
-                                    </p>
-                                </div>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </div>
