@@ -22,6 +22,7 @@ import ServiceList from "../pages/adimn/service-related-page/ServiceList";
 import ServiceUpdate from "../pages/adimn/service-related-page/ServiceUpdate";
 import Login from "../components/Login/Login";
 import SignUp from "../components/SignUp/SignUp";
+import ServiceDetails from "../pages/adimn/service-details-page/ServiceDetails";
 
 export const router = createBrowserRouter([
 
@@ -111,6 +112,10 @@ export const router = createBrowserRouter([
             {
                 path: "service-update/:id",
                 element: <ServiceUpdate></ServiceUpdate>
+            },
+            {
+                path : "service-details/:id",
+                element : <ServiceDetails></ServiceDetails>
             }
         ]
     },

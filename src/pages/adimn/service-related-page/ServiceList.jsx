@@ -110,6 +110,18 @@ const ServiceList = () => {
                                             Delete
                                         </span>
                                     </div>
+                                    <div className="relative group">
+                                        <Link to={`/dashboard/service-details/${item._id}`}>
+                                            <button
+                                                className="bg-red-500 hover:bg-red-600 text-white py-2 px-3 rounded-md flex items-center"
+                                            >
+                                                <FaTrash />
+                                            </button>
+                                            <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 opacity-0 group-hover:opacity-100 transition bg-gray-800 text-white text-[10px] px-2 py-1 rounded">
+                                                Service Details
+                                            </span>
+                                        </Link>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
