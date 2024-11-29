@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const uploadImg = async (file) => {
-    const cloudName = import.meta.env.VITE_CLOUD_NAME; // Your Cloudinary cloud name
+    const cloudName = "dj2edy2rg"  // Your Cloudinary cloud name
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "portfili-preset"); // Your Cloudinary upload preset

@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet-async';
 import { uploadImg } from '../../../upload-img/UploadImg';
 import useAxiosPublic from './../../../hook/UseAxiosPublic';
 import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { uploadVideo } from './../../../upload-video/UploadVideo';
 
 const ServiceDetails = () => {
     const [images, setImages] = useState("");
@@ -15,6 +17,13 @@ const ServiceDetails = () => {
     const [loading, setLoading] = useState(false);
     const axiosPublic = useAxiosPublic();
     const { id } = useParams();
+    const { data: singleService = {}, isLoading, isError, refetch } = useQuery({
+        queryKey: 'singleService',
+        queryFn: async () => {
+            let res = await axiosPublic.get(`/service/${id}`);
+            return res.data.data;
+        },
+    });
 
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
@@ -62,6 +71,7 @@ const ServiceDetails = () => {
         e.preventDefault();
         const img = e.target.img.files[0];
         const video = e.target.video.files[0];
+        const service_name = e.target.service_name.value;
         setLoading(true);
 
         let imgUrl = "";
@@ -74,9 +84,10 @@ const ServiceDetails = () => {
         if (!name?.video) {
             videoUrl = "";
         }
-        videoUrl = await uploadImg(video);
+        videoUrl = await uploadVideo(video);
 
         const packageData = {
+
             heading,
             serviceList,
             des,
@@ -84,10 +95,13 @@ const ServiceDetails = () => {
             img: imgUrl,
             headingTwo,
             video: videoUrl,
+            service_name
 
         };
 
-        axiosPublic.post('/feature', packageData)
+        console.log(packageData)
+
+        axiosPublic.post('/service-details', packageData)
             .then((res) => {
                 if (res) {
                     Swal.fire({
@@ -98,6 +112,13 @@ const ServiceDetails = () => {
                         timer: 1500
                     });
                 }
+                setHeading("");
+                setServiceList([{ service_name: "", service_des: "" }]);
+                setDes("");
+                setStap([{ step_name: "", step_des: "" }]);
+                setHeadingTwo("");
+                e.target.reset(); // Reset file inputs
+                refetch();
             })
             .catch((error) => {
                 console.error("Error submitting data:", error);
@@ -122,8 +143,8 @@ const ServiceDetails = () => {
                     <label className="block text-gray-700 font-semibold mb-2">Service Name</label>
                     <input
                         type="text"
-                        value={heading}
-                        onChange={(e) => setHeading(e.target.value)}
+                        defaultValue={singleService?.service_name}
+                        name='service_name'
                         className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-pink-500"
                         placeholder="Enter heading"
                         required
@@ -164,6 +185,18 @@ const ServiceDetails = () => {
                         />
                     </div>
                 </div>
+                {
+                    images && (
+                        <div className="mb-4">
+                            <span className="text-gray-700">Selected Image:</span>
+                            <img
+                                src={images}
+                                alt="uploaded-image"
+                                className="w-48 h-48 rounded-lg object-cover"
+                            />
+                        </div>
+                    )
+                }
                 <div className="mb-4">
                     <label className="block text-gray-700 font-semibold mb-2 text-xl">Service Content</label>
                     {serviceList.map((content, index) => (
@@ -256,7 +289,7 @@ const ServiceDetails = () => {
                     </div>
                     <div className="p-2 w-full">
                         <div className="relative">
-                            <label className="leading-7 text-sm text-gray-600 font-bold">Upload Image</label>
+                            <label className="leading-7 text-sm text-gray-600 font-bold">Upload Video</label>
                             <input
                                 type="file"
                                 name="video"
