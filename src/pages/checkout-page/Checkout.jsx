@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import useAxiosPublic from "../../hook/UseAxiosPublic";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
-// eslint-disable-next-line react/prop-types
 const Checkout = () => {
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
-
-  // Fetch all services
+  const [loader, setLoader] = useState(false); // State to manage button loading state
   const { data: allService = [], isLoading } = useQuery({
     queryKey: ["singleServiceDetails"],
     queryFn: async () => {
@@ -17,24 +16,64 @@ const Checkout = () => {
     },
   });
 
-  // State to hold the selected service details
   const [data, setData] = useState(null);
 
   useEffect(() => {
     if (!isLoading && allService.length > 0) {
-      // Filter to get the service details by ID
       const dataList = allService.find((service) => service._id === id);
       setData(dataList);
     }
-  }, [id, allService, isLoading]); // Depend on `id`, `allService`, and `isLoading`
+  }, [id, allService, isLoading]);
 
   if (isLoading) return <div>Loading...</div>;
 
-  console.log(data)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true); // Start the loader
+    const service_name = e.target.service_name.value;
+    const service_price = e.target.service_price.value;
+    const first_name = e.target.first_name.value;
+    const last_name = e.target.last_name.value;
+    const phone = e.target.phone.value;
+    const email = e.target.email.value;
+    const message = e.target.message.value;
+    const payload = {
+      service_name,
+      service_price,
+      first_name,
+      last_name,
+      phone,
+      email,
+      message,
+    };
+
+    try {
+      let resp = await axiosPublic.post(`/checkout`, payload);
+      if (resp) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your order has been placed successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Failed to place order",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      console.log(error);
+    } finally {
+      setLoader(false); // Stop the loader
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Banner Section */}
       <div className="relative">
         <div
           className="h-60 bg-cover bg-center"
@@ -49,9 +88,8 @@ const Checkout = () => {
         </div>
       </div>
 
-      {/* Form Section */}
       <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-md shadow-lg">
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="service_name" className="block text-sm font-medium text-gray-700">
@@ -152,9 +190,11 @@ const Checkout = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="w-full sm:w-auto px-6 py-3 bg-red-500 text-white font-medium rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              disabled={loader} // Disable button while loading
+              className={`w-full sm:w-auto px-6 py-3 ${loader ? "bg-gray-400 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"
+                } text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500`}
             >
-              Order Confirm
+              {loader ? "Processing..." : "Order Confirm"}
             </button>
           </div>
         </form>
