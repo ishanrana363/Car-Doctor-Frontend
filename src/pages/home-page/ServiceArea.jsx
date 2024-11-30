@@ -10,7 +10,7 @@ const ServiceArea = () => {
     const { data: services = [], isLoading } = useQuery({
         queryKey: "services",
         queryFn: async () => {
-            let res = await axiosPublic.get(`/service`);
+            let res = await axiosPublic.get(`/all-service`);
             return res.data.data;
         },
     });

@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import useAxiosPublic from '../../hook/UseAxiosPublic';
-import { useParams } from 'react-router-dom';
-const ServiceDetailsList = () => {
-const axiosPublic = useAxiosPublic();
-const {id} = useParams()
+import { Link, useParams } from 'react-router-dom';
+const ServiceDetailsList = ( ) => {
+    const axiosPublic = useAxiosPublic();
+    const { id } = useParams()
 
     const { data: singleServiceDetails = [], isLoading } = useQuery({
         queryKey: "singleServiceDetails",
         queryFn: async () => {
-            let res = await axiosPublic.get(`/service-by-id/${id}`);
+            let res = await axiosPublic.get(`/all-service`);
             return res.data.data;
         },
     });
-    console.log(singleServiceDetails);
+
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        const serviceData = singleServiceDetails.filter(data => data._id === id);
+        setData(serviceData);
+    }, [id])
+
     return (
         <div className="container mx-auto p-6">
             {/* Main Grid Layout */}
@@ -22,40 +28,41 @@ const {id} = useParams()
                 <div className="md:col-span-3">
                     {/* Image Section */}
                     <img
-                        src="https://via.placeholder.com/800x400"
+                        src={data[0]?.img2}
                         alt="Car Engine Service"
-                        className="rounded-lg w-full"
+                        className="rounded-lg w-1/2 h-auto "
                     />
 
                     {/* Heading and Description */}
                     <h2 className="text-3xl font-bold mt-6">
-                        Unique Car Engine Service
+                        {
+                            data[0]?.service_title || "Unique Car Engine Service"
+                        }
                     </h2>
                     <p className="mt-4 text-gray-600">
-                        There are many variations of passages of Lorem Ipsum available, but
-                        the majority have suffered alteration. A professional car mechanic
-                        with modern tools and years of experience provides the best car
-                        services in your area.
+                        {
+                            data[0]?.des || "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration. A professional car mechanic with modern tools and years of experience provides the best car services in your area."
+                        }
                     </p>
 
                     {/* Services Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        {[
-                            "Instant Car Services",
-                            "24/7 Quality Service",
-                            "Easy Customer Service",
-                            "Quality Cost Service",
-                        ].map((service, index) => (
-                            <div
-                                key={index}
-                                className="bg-white border p-6 rounded-lg shadow-lg hover:shadow-xl transition"
-                            >
-                                <h3 className="text-xl font-semibold">{service}</h3>
-                                <p className="text-gray-600 mt-4">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                </p>
-                            </div>
-                        ))}
+
+                        {
+
+                            data[0]?.serviceList.map((service, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-white border p-6 rounded-lg shadow-lg hover:shadow-xl transition"
+                                >
+                                    <h3 className="text-xl font-semibold">{service.service_name}</h3>
+                                    <p className="text-gray-600 mt-4">
+                                        {
+                                            service.service_des
+                                        }
+                                    </p>
+                                </div>
+                            ))}
                     </div>
 
                     {/* Steps to Process */}
@@ -121,10 +128,12 @@ const {id} = useParams()
 
                     {/* Price Section */}
                     <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-                        <h3 className="text-xl font-semibold mb-4">Price: $250.00</h3>
-                        <button className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition">
-                            Proceed to Checkout
-                        </button>
+                        <h3 className="text-xl font-semibold mb-4">Price: $ {data[0]?.service_price} </h3>
+                        <Link to={`/checkout/${data[0]?._id}`}>
+                            <button className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition">
+                                Proceed to Checkout
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

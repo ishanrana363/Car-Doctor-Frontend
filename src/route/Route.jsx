@@ -25,6 +25,7 @@ import SignUp from "../components/SignUp/SignUp";
 import ServiceDetails from "../pages/adimn/service-details-page/ServiceDetailsUpload";
 import ServiceDetailsUpload from "../pages/adimn/service-details-page/ServiceDetailsUpload";
 import ServiceDetailsList from "../pages/service-details/ServiceDetailsList";
+import Checkout from "../pages/checkout-page/Checkout";
 
 export const router = createBrowserRouter([
 
@@ -119,6 +120,7 @@ export const router = createBrowserRouter([
                 path : "service-details/:id",
                 element : <ServiceDetailsUpload></ServiceDetailsUpload>
             },
+            
 
         ]
     },
@@ -133,6 +135,10 @@ export const router = createBrowserRouter([
     {
         path : "/service-details/:id",
         element : <ServiceDetailsList></ServiceDetailsList>
+    },
+    {
+        path : "/checkout/:id",
+        element : <Checkout></Checkout>
     }
 
 ]);
